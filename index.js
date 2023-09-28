@@ -1,6 +1,10 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 import TelegramBot from 'node-telegram-bot-api';
+import express from 'express';
+
+const app= express();
+const port = process.env.PORT || 3000;
 
 dotenv.config();
 
@@ -83,6 +87,7 @@ bot.on('message', (msg) => {
         },
       })
       .then((response) => {
+  
         let previousImage = '';
 
 // Inside the response handling section:
@@ -108,3 +113,17 @@ if (response.data.photos.length > 0) {
       });
   }
 });
+
+
+app.listen(port, () => {
+  console.log(`server is running ...`)
+})
+
+//let make a route for the bot
+
+app.get('/bot', (req, res) => {
+  res.send('bot is running ...')
+})
+
+
+
